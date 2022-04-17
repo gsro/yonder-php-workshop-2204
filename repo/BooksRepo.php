@@ -6,32 +6,14 @@ require_once("model/validators/Validator.php");
 class BooksRepo implements RepoInterface {
 	private array $books;
 	private $validator;
-	private array $category_counter;
 
-	function __construct(string $validator_class, array $books = null) {
-		$category_counter = [];
-		if ($books) {
-			foreach ($books as $book) {
-				if (isset($this->category_counter[$book->getCategory()])) {
-					$this->category_counter[$book->getCategory()]++;	
-				} else $this->category_counter[$book->getCategory()] = 1;
-			}
-		}
-		$this->books = $books ?? [];
+	function __construct(string $validator_class) {
+		$this->books = [];
 		$this->validator = $validator_class;
 	}
 
 	public function save(Book $book): void {
 		$this->validator::validate($book);
-		if (isset($this->category_counter[$book->getCategory()])) {
-			if ($this->category_counter[$book->getCategory()] > 10)
-				throw new RuntimeException("Can't have more than 10 of " . $book->getCategory());
-			
-			$this->category_counter[$book->getCategory()]++;
-		} else {
-			$this->category_counter[$book->getCategory()] = 1;
-		}
-
 		array_push($this->books, $book);
 	}
 	
@@ -46,9 +28,29 @@ class BooksRepo implements RepoInterface {
 		throw new RuntimeException("Book not found");
 	}
 	
-	function update(int $id, Book $book): void {
+	function update(Book $new_book): Book {
+		foreach ($this->books as $book) {
+			if ($book->getId() == $new_book->getId()) {
+				$old_book = new Book($book->getId(), $book->getName(), $book->getPrice(), $book->getCategory());
+
+				$book->setCategory($new_book->getCategory());
+				$book->setPrice($new_book->getPrice());
+				$book->setName($new_book->getName());
+				return $old_book;
+			}
+		}
+		throw new RuntimeException("Book not found");
 	}
 	
-	function delete(int $id): void {
+	function delete(int $id): Book {
+		$index = 0;
+		foreach ($this->books as $book) {
+			if ($book->getId() == $id) {
+				unset($this->books[$index]);
+				return $book;
+			}
+			$index++;
+		}
+		throw new RuntimeException("Book not found");	
 	}
 }

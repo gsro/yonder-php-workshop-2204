@@ -8,7 +8,7 @@ interface RepoInterface {
     public function all(): array;
     public function find(int $id): Book;
     
-    public function update(int $id, Book $book): void;
+    public function update(Book $book): Book;
 
-    public function delete(int $id): void;
+    public function delete(int $id): Book;
 }
