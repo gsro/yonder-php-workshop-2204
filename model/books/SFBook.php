@@ -6,6 +6,6 @@ class SFBook extends Book {
     }
 
     public function __toString(): string {
-        return "SF book #" . $this->id . ": " . $this->title;
+        return "SF book #" . $this->id . ": " . $this->name;
     }
 }

@@ -6,6 +6,6 @@ class MusicalBook extends Book {
     }
 
     public function __toString(): string {
-        return "Musical book #" . $this->id . ": " . $this->title;
+        return "Musical book #" . $this->id . ": " . $this->name;
     }
 }
