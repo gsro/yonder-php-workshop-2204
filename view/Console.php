@@ -28,6 +28,8 @@ class Console {
                 case '4':
                     $this->remove();
                     break;
+                default:
+                    $running = false;
             }
         }
     }
