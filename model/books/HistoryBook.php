@@ -6,6 +6,6 @@ class HistoryBook extends Book {
     }
 
     public function __toString(): string {
-        return "History book #" . $this->id . ": " . $this->name;
+        return "History book #" . $this->id . ": " . $this->name . " (" . $this->category . ")";
     }
 }

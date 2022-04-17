@@ -15,10 +15,16 @@ class BooksController {
         $this->category_counter = [];
 
         $this->addBook(1, 'marc', 200, 'cat1', 'sf');
-        $this->addBook(2, 'abc', 200, 'cat1', 'musical');
-        $this->addBook(3, '123', 200, 'cat1', 'history');
+        $this->addBook(2, 'abc', 200, 'cat2', 'sf'); 
+        $this->addBook(3, '123', 200, 'cat3', 'history');
         $this->addBook(4, 'mara', 200, 'cat1', 'sf');
         $this->addBook(5, 'mard', 200, 'cat1', 'sf');
+        $this->addBook(6, 'mard', 200, 'cat1', 'musical');
+        $this->addBook(7, 'mard', 200, 'cat1', 'sf');
+        $this->addBook(8, 'mard', 200, 'cat1', 'musical');
+        $this->addBook(9, 'mard', 200, 'cat1', 'sf');
+        $this->addBook(10, 'mard', 200, 'cat1', 'sf');
+        $this->addBook(11, 'mard', 200, 'cat1', 'musical');
 	}
 
     function addBook(int $id, string $name, int $price, string $category, string $type) {

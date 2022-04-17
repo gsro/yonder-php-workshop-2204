@@ -12,9 +12,15 @@ class BooksRepo implements RepoInterface {
 		$this->validator = $validator_class;
 	}
 
-	public function save(Book $book): void {
-		$this->validator::validate($book);
-		array_push($this->books, $book);
+	public function save(Book $new_book): void {
+		$this->validator::validate($new_book);
+
+		foreach ($this->books as $book) {
+			if ($book->getId() == $new_book->getId()) 
+				throw new RuntimeException('Book already exists');
+		}
+
+		array_push($this->books, $new_book);
 	}
 	
 	function all(): array {
@@ -29,6 +35,8 @@ class BooksRepo implements RepoInterface {
 	}
 	
 	function update(Book $new_book): Book {
+		$this->validator::validate($new_book);
+		
 		foreach ($this->books as $book) {
 			if ($book->getId() == $new_book->getId()) {
 				$old_book = new Book($book->getId(), $book->getName(), $book->getPrice(), $book->getCategory());
