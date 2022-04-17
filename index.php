@@ -1,18 +1,17 @@
 <?php
 
 require_once("./repo/BooksRepo.php");
-require_once("./model/books/HistoryBook.php");
+require_once("./ctrl/BooksController.php");
 require_once("./model/validators/BookValidator.php");
-$repo = new BooksRepo(BookValidator::class);
+require_once("./view/Console.php");
 
-
-
-foreach (range(0, 9) as $i) {
-    $book = new HistoryBook($i, "titlu", 2, "categorie");
-    $repo->save($book);
+foreach (glob("model/books/*.php") as $filename)
+{
+    require_once($filename);
 }
 
-// var_dump($repo);
+$repo = new BooksRepo(BookValidator::class);
+$ctrl = new BooksController($repo);
 
-$repo2 = new BooksRepo(BookValidator::class, $repo->all());
-var_dump($repo2);
+$ui = new Console($ctrl);
+$ui->run();
