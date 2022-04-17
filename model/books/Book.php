@@ -2,7 +2,7 @@
 
 require_once("model/entity.php");
 
-abstract class Book extends Entity {
+class Book extends Entity {
     protected string $name;
     protected int $price;
     protected string $category;
