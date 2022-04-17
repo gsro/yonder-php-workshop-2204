@@ -45,7 +45,8 @@ class BooksController {
     }
 
     function removeBook(int $id) {
-        return $this->repo->delete($id);
+        $book = $this->repo->delete($id);
+        $this->category_counter[$book->getCategory()]--;
     }
 
     private function constructBook(int $id, string $name, int $price, string $category, string $type): Book {
