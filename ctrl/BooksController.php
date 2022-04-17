@@ -13,6 +13,12 @@ class BooksController {
 	function __construct(BooksRepo $repo) {
         $this->repo = $repo;
         $this->category_counter = [];
+
+        $this->addBook(1, 'marc', 200, 'cat1', 'sf');
+        $this->addBook(2, 'abc', 200, 'cat1', 'musical');
+        $this->addBook(3, '123', 200, 'cat1', 'history');
+        $this->addBook(4, 'mara', 200, 'cat1', 'sf');
+        $this->addBook(5, 'mard', 200, 'cat1', 'sf');
 	}
 
     function addBook(int $id, string $name, int $price, string $category, string $type) {
@@ -47,6 +53,12 @@ class BooksController {
     function removeBook(int $id) {
         $book = $this->repo->delete($id);
         $this->category_counter[$book->getCategory()]--;
+    }
+
+    function list() {
+        $books = $this->repo->all();
+        usort($books, fn(Book $a, Book $b) => strcmp($a->getName(), $b->getName()));
+        return $books;
     }
 
     private function constructBook(int $id, string $name, int $price, string $category, string $type): Book {
