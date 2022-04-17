@@ -29,7 +29,6 @@ class BooksController {
 
     function addBook(int $id, string $name, int $price, string $category, string $type) {
         $book = $this->constructBook($id, $name, $price, $category, $type);
-        $this->repo->save($book);
         if (isset($this->category_counter[$book->getCategory()])) {
 			if ($this->category_counter[$book->getCategory()] >= 10)
 				throw new RuntimeException("Can't have more than 10 of " . $book->getCategory());
@@ -38,6 +37,14 @@ class BooksController {
 		} else {
 			$this->category_counter[$book->getCategory()] = 1;
 		}
+
+        try {
+            $this->repo->save($book);
+        } catch (RuntimeException $e) {
+            $this->category_counter[$book->getCategory()]--;
+            throw $e;
+        }
+
     }
 
     function updateBook(int $id, string $name, int $price, string $category) {
