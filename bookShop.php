@@ -5,7 +5,7 @@ declare(strict_types = 1);
 use App\Controllers\BookController;
 use App\Services\BookService;
 
-spl_autoload_register(function ($className) {
+spl_autoload_register(function (string $className): void {
     [, $directory, $class] = explode('\\', $className, 3);
     $classPath = __DIR__ . "/$directory/$class.php";
 
