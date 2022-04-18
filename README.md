@@ -1,0 +1,3 @@
+## Library inventory
+
+#### We need to build an app that handles a library inventory. The bookseller has the possibility to add 3 types of books SF books, history books and musical books. He also can edit, delete, and display the list of books. The maximum number of books he can add is 10 per category. The book has 4 fields: id, name, price and category. The name of the book and category should not have more than 10 characters. The book price should be a positive number. Create a PHP application that can handle this book inventory. We need to use classes, interfaces, abstract classes, and traits. We need to display the books alphabetically by name of the book
