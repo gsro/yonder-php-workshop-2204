@@ -28,4 +28,11 @@ class Validator
             throw new InvalidArgumentException("$value should be at least 0");
         }
     }
+
+    public static function validateEnum(string $value, array $enums): void
+    {
+        if (!in_array($value, $enums, true)) {
+            throw new InvalidArgumentException("$value should be one of " . implode(',', $enums));
+        }
+    }
 }

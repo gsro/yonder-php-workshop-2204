@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Models\AbstractBook;
 use App\Services\BookServiceInterface;
 use App\Validator\Validator;
 use Exception;
@@ -22,6 +23,7 @@ class BookController
         Validator::validateLength($name);
         Validator::validateLength($category);
         Validator::validatePositiveNumber($price);
+        Validator::validateEnum($category, AbstractBook::CATEGORIES);
 
         $this->bookService->createBook($name, $category, $price);
     }
@@ -35,6 +37,7 @@ class BookController
         Validator::validateLength($category);
         Validator::validatePositiveNumber($price);
         Validator::validateBlank($bookId);
+        Validator::validateEnum($category, AbstractBook::CATEGORIES);
 
         $this->bookService->updateBook($bookId, $name, $category, $price);
     }

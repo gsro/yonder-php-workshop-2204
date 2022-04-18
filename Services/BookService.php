@@ -95,7 +95,7 @@ class BookService implements BookServiceInterface
 
         foreach ($this->books as $books) {
             foreach ($books as $book) {
-                $books[] = $book;
+                $formattedBooks[] = $book;
             }
         }
 

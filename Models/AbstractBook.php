@@ -6,6 +6,8 @@ namespace App\Models;
 
 abstract class AbstractBook
 {
+    public const CATEGORIES = ['sf', 'music', 'history'];
+
     public function __construct(private string $id, private string $name, private string $category, private int $price)
     {
     }
