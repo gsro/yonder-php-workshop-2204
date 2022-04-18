@@ -18,20 +18,20 @@ class BookController
     /**
      * @throws Exception
      */
-    public function createBook(string $name, string $category, int $price): void
+    public function createBook(string $name, string $category, int $price): AbstractBook
     {
         Validator::validateLength($name);
         Validator::validateLength($category);
         Validator::validatePositiveNumber($price);
         Validator::validateEnum($category, AbstractBook::CATEGORIES);
 
-        $this->bookService->createBook($name, $category, $price);
+        return $this->bookService->createBook($name, $category, $price);
     }
 
     /**
      * @throws Exception
      */
-    public function updateBook(string $bookId, string $name, string $category, int $price): void
+    public function updateBook(string $bookId, string $name, string $category, int $price): AbstractBook
     {
         Validator::validateLength($name);
         Validator::validateLength($category);
@@ -39,7 +39,7 @@ class BookController
         Validator::validateBlank($bookId);
         Validator::validateEnum($category, AbstractBook::CATEGORIES);
 
-        $this->bookService->updateBook($bookId, $name, $category, $price);
+        return $this->bookService->updateBook($bookId, $name, $category, $price);
     }
 
     /**

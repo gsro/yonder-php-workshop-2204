@@ -53,12 +53,12 @@ class BookService implements BookServiceInterface
     {
         $isFound = false;
 
-        foreach ($this->books as $books) {
+        foreach ($this->books as $category => $books) {
             if (!isset($books[$bookId])) {
                 continue;
             }
 
-            unset($books[$bookId]);
+            unset($this->books[$category][$bookId]);
             $isFound = true;
             break;
         }
