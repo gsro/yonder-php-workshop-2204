@@ -20,7 +20,7 @@ class BookService implements BookServiceInterface
      */
     public function createBook(string $name, string $category, int $price): AbstractBook
     {
-        if (count($this->books[$category] ?? []) >= self::NO_OF_BOOK_CATEGORY) {
+        if (count($this->books[$category] ?? []) > self::NO_OF_BOOK_CATEGORY) {
             throw new Exception('Only 10 categories per book are allowed');
         }
 
@@ -74,7 +74,7 @@ class BookService implements BookServiceInterface
 
         usort(
             $books,
-            fn(AbstractBook $firstBook, AbstractBook $secondBook) => $firstBook->getId() <=> $secondBook->getId()
+            fn (AbstractBook $firstBook, AbstractBook $secondBook) => $firstBook->getName() <=> $secondBook->getName()
         );
 
         return $books;
