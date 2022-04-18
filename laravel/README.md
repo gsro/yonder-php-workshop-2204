@@ -7,6 +7,55 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+---
+# Assignment 1
+
+* Create a model and a migration for an entity named `Article`
+  * The article will have at least the first 3 fields
+    * id - primary key
+    * title - string (150), indexed
+    * content
+    * author_id
+* Create a controller with a few methods
+  * `[GET]` Listing - will list articles
+  * `[GET]` Get (one) - will display one article
+  * `[GET]` Create - will display the creation page 
+  * `[POST]` Store - will save the new article to the database
+  * `[GET]` Edit - will display the edit page
+  * `[POST]` Update - will update the selected article to the database
+  * `[GET]` Delete - will show the deletion confirmation
+  * `[POST]` Destroy - will delete the selected article to 
+
+Styling is not required, but encouraged if possible :)
+
+Minimum requirements:
+* The routes should be correctly defined, each to a method in the controller
+* The model should exist as a class
+* The migration should contain at least the title and content
+* Seed some articles in the db
+    * `php artisan migrate:fresh --seed` should generate the articles
+
+Bonus points for:
+* Finding the command that creates both the migration and the model
+* Finding the command that creates the controller with prefilled methods
+* If the UI is usable - ability to create, retrieve, update, delete articles
+* Validation of the data
+* Error messages (with session flash)
+
+Hints & docs:
+* [`Link: $request->session()->flash()`](https://laravel.com/docs/9.x/session#flash-data) can be used to send messages cross requests
+* [Eloquent (full doc with examples)](https://laravel.com/docs/9.x/eloquent#retrieving-or-creating-models)
+* [Handling models (retrieve or create)](https://laravel.com/docs/9.x/eloquent#retrieving-or-creating-models)
+* [Handling models (update or create)](https://laravel.com/docs/9.x/eloquent#inserting-and-updating-models)
+* [Handling models (deleting)](https://laravel.com/docs/9.x/eloquent#deleting-models)
+* To check if the routes are defined correctly the `php artisan route:list` command can be used
+* [Laravel Controllers](https://laravel.com/docs/9.x/controllers#main-content)
+* [Blade templating](https://laravel.com/docs/9.x/blade)
+* [Routing](https://laravel.com/docs/9.x/routing)
+* [Retrieving HTTP requests input](https://laravel.com/docs/9.x/requests#input)
+
+
+---
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
