@@ -30,7 +30,7 @@ class Repo implements IRepository
         if($nr>=10)
             throw new InvalidArgumentException("The maximum number of books should be < 10/category");
 
-        if(isset($this->bookList[$book->getId()])){
+        if(isset($this->books[$book->getId()])){
             throw new InvalidArgumentException("The book is used.");
         }
 
@@ -45,7 +45,7 @@ class Repo implements IRepository
 
     public function delete(int $id): void
     {
-        if (!isset($this->bookList[$id]))
+        if (!isset($this->books[$id]))
             throw new InvalidArgumentException("The book is stolen, can't be removed");
         unset($this->books[$id]);
     }
