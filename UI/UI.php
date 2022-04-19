@@ -62,12 +62,17 @@ class UI
         $price = (int)$price;
         echo "category:";
         $category = readline("category: ");
-        $this->ctrl->addScienceFictionBook($id, $title, $price, $category);
+        try {
+            $this->ctrl->addScienceFictionBook($id, $title, $price, $category);
+
+        } catch (Exception) {
+            echo "The maximum number of books should be < 10/category";
+        }
 
     }
 
     public function addHistoryBook()
-    {    echo "id:";
+    {   echo "id:";
         $id = readline("id: ");
         if (!is_numeric($id)) { echo "Id should be a number\n"; return; }
         $id = (int)$id;
@@ -79,7 +84,13 @@ class UI
         $price = (int)$price;
         echo "category:";
         $category = readline("category: ");
-        $this->ctrl->addHistoryBook($id, $title, $price, $category);
+        try {
+            $this->ctrl->addHistoryBook($id, $title, $price, $category);
+
+        } catch (Exception) {
+            echo "The maximum number of books should be < 10/category";
+        }
+
     }
 
     public function addMusicBook(): void
@@ -95,7 +106,12 @@ class UI
         $price = (int)$price;
         echo "category:";
         $category = readline("category: ");
-        $this->ctrl->addMusicBook($id, $title, $price, $category);
+        try {
+            $this->ctrl->addMusicBook($id, $title, $price, $category);
+
+        } catch (Exception) {
+            echo "The maximum number of books should be < 10/category";
+        }
     }
 
     public function deleteBook(): void
@@ -103,7 +119,13 @@ class UI
         $id = readline("Id: ");
         if (!is_numeric($id)) { echo "Id should be a number\n";  return; }
         $id = (int)$id;
-        $this->ctrl->deleteBook($id);
+
+        try {
+            $this->ctrl->deleteBook($id);
+
+        } catch (Exception) {
+            echo ("The book is stolen\n");
+        }
     }
 
     public function updateBook(): void
@@ -119,7 +141,13 @@ class UI
         $price = (int)$price;
         echo "category:";
         $category = readline("Category: ");
-        $this->ctrl->updateBook($id, $title, $price, $category);
+
+        try {
+            $this->ctrl->updateBook($id, $title, $price, $category);
+
+        } catch (Exception) {
+            echo ("The book is stolen, update is impossible\n");
+        }
     }
 
     public function display(): void
