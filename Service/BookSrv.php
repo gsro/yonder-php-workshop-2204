@@ -15,25 +15,52 @@ class BookSrv
     public function addScienceFictionBook(int $id,string $name,int $price,string $category):void
     {
         $book = new ScienceFictionBook($id,$name,$price,$category);
-        $this->repo->add($book);
+        try {
+            $this->repo->add($book);
+
+        } catch (Exception) {
+            throw new InvalidArgumentException("The maximum number of books should be < 10/category");
+        }
     }
     public function addMusicBook(int $id,string $name,int $price,string $category):void
     {
         $book = new MusicBook($id,$name,$price,$category);
-        $this->repo->add($book);
+        try {
+            $this->repo->add($book);
+
+        } catch (Exception) {
+            throw new InvalidArgumentException("The maximum number of books should be < 10/category");
+        }
     }
     public function addHistoryBook(int $id,string $name,int $price,string $category):void
     {
         $book = new HistoryBook($id,$name,$price,$category);
-        $this->repo->add($book);
+        try {
+            $this->repo->add($book);
+
+        } catch (Exception) {
+            throw new InvalidArgumentException("The maximum number of books should be < 10/category");
+        }
     }
     public function deleteBook(int $id):void
     {
-        $this->repo->delete($id);
+
+        try {
+            $this->repo->delete($id);
+
+        } catch (Exception) {
+            throw new InvalidArgumentException("The book is stolen");
+        }
     }
     public function updateBook(int $id,string $name,int $price,string $category):void
     {
-        $book = $this->repo->find($id);
+        try {
+            $book = $this->repo->find($id);
+
+        } catch (Exception) {
+            throw new InvalidArgumentException("The book is stolen");
+        }
+
         $book->setName($name);
         $book->setPrice($price);
         $book->setCategory($category);
